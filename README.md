@@ -39,6 +39,43 @@ python app.py
 
 Each service includes a `.env.example` file with default values. Copy it to `.env` and modify as needed.
 
+## Screenshots
+
+### Running Services
+Both services started and listening on their respective ports.
+
+![Running Services](images/running_services.png)
+
+### Health Status
+Health check endpoints returning successful responses from both services.
+
+![Health Status](images/health_status.png)
+
+### Successful Message
+Service B successfully calling Service A's echo endpoint and returning the combined response.
+
+![Success Message](images/success_msg.png)
+
+### Both Services Logs
+Terminal output showing request logs from both Service A and Service B.
+
+![Both Services Logs](images/both_services_logs.png)
+
+### Log File
+Log entries written to the log file as configured in the `.env` file.
+
+![Log File](images/log_file.png)
+
+### Service A Down
+Service B returning HTTP 503 when Service A is unavailable (stopped).
+
+![Service A Down](images/service_a_down.png)
+
+### Service B Timeout
+Service B timing out when Service A takes too long to respond (exceeds `ECHO_TIMEOUT_SECONDS`).
+
+![Service B Timeout](images/service_b_timeout.png)
+
 ## API Reference
 
 ### Service A (Echo API)
