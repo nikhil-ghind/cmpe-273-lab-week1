@@ -2,17 +2,25 @@ import os
 import time
 import logging
 from flask import Flask, request, jsonify, g
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
 # Configuration from environment variables
 SERVICE_NAME = os.environ.get("SERVICE_NAME", "service-a")
 PORT = int(os.environ.get("PORT", 8080))
+LOG_FILE = os.environ.get("LOG_FILE", "service_a.log")
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format="%(levelname)s %(message)s"
+    format="%(levelname)s %(message)s",
+    handlers=[
+        logging.FileHandler(LOG_FILE),
+        logging.StreamHandler()
+    ]
 )
 logger = logging.getLogger(__name__)
 

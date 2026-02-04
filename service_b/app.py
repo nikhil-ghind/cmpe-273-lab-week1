@@ -3,6 +3,9 @@ import time
 import logging
 from flask import Flask, request, jsonify, g
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -11,11 +14,16 @@ SERVICE_NAME = os.environ.get("SERVICE_NAME", "service-b")
 PORT = int(os.environ.get("PORT", 8081))
 ECHO_BASE_URL = os.environ.get("ECHO_BASE_URL", "http://localhost:8080")
 ECHO_TIMEOUT_SECONDS = float(os.environ.get("ECHO_TIMEOUT_SECONDS", 1.0))
+LOG_FILE = os.environ.get("LOG_FILE", "service_b.log")
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format="%(levelname)s %(message)s"
+    format="%(levelname)s %(message)s",
+    handlers=[
+        logging.FileHandler(LOG_FILE),
+        logging.StreamHandler()
+    ]
 )
 logger = logging.getLogger(__name__)
 

@@ -2,26 +2,6 @@
 
 A locally distributed system with two independent Python services communicating over HTTP REST APIs.
 
-## Architecture
-
-```
-Client --> Service B (/call-echo) --> Service A (/echo)
-              :8081                      :8080
-```
-
-## Project Structure
-
-```
-cmpe-273-lab/
-├── README.md
-├── service_a/
-│   ├── app.py           # Echo API service
-│   └── requirements.txt
-└── service_b/
-    ├── app.py           # Client service
-    └── requirements.txt
-```
-
 ## Prerequisites
 
 - Python 3.10+
@@ -42,6 +22,7 @@ cd service_a
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+cp .env.example .env  # Configure environment variables
 python app.py
 ```
 
@@ -52,8 +33,11 @@ cd service_b
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+cp .env.example .env  # Configure environment variables
 python app.py
 ```
+
+Each service includes a `.env.example` file with default values. Copy it to `.env` and modify as needed.
 
 ## API Reference
 
@@ -168,6 +152,7 @@ ERROR service=service-b action=call-echo error="Echo service unavailable" cause=
 |----------|---------|-------------|
 | SERVICE_NAME | service-a | Name used in logs |
 | PORT | 8080 | Server port |
+| LOG_FILE | service_a.log | Log file path |
 
 ### Service B
 
@@ -177,6 +162,7 @@ ERROR service=service-b action=call-echo error="Echo service unavailable" cause=
 | PORT | 8081 | Server port |
 | ECHO_BASE_URL | http://localhost:8080 | Service A base URL |
 | ECHO_TIMEOUT_SECONDS | 1.0 | Timeout for downstream calls |
+| LOG_FILE | service_b.log | Log file path |
 
 ## Technology Stack
 
