@@ -76,6 +76,20 @@ Service B timing out when Service A takes too long to respond (exceeds `ECHO_TIM
 
 ![Service B Timeout](images/service_b_timeout.png)
 
+## FAQ
+
+### What makes this distributed?
+
+This system is distributed because:
+
+- **Independent Processes**: Service A and Service B run as separate Python processes with their own memory space, not as threads or functions within a single application.
+- **Network Communication**: Services communicate over HTTP/TCP rather than direct function calls or shared memory. Service B makes network requests to Service A at `localhost:8080`.
+- **Independent Failure**: Each service can fail independently. When Service A crashes, Service B continues running and handles the failure gracefully by returning a 503 error.
+- **No Shared State**: Services don't share databases, files, or memory. Each service manages its own state and configuration.
+- **Location Transparency**: Service B connects to Service A via a configurable URL (`ECHO_BASE_URL`). The services could run on different machines by simply changing this URL.
+
+While both services run on `localhost` for simplicity, the architecture demonstrates core distributed systems concepts: network-based communication, fault isolation, and independent deployment.
+
 ## API Reference
 
 ### Service A (Echo API)
