@@ -82,8 +82,6 @@ Service B timing out when Service A takes too long to respond (exceeds `ECHO_TIM
 
 This system is distributed because:
 
-Here’s a **short, human-sounding 5-point answer** you can use directly:
-
 1. The system is distributed because it is split into two separate services that run as independent processes.
 2. The services communicate over the network using HTTP rather than direct function calls.
 3. There is no shared memory or shared state between the services.
